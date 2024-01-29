@@ -1,8 +1,8 @@
 const  HomePages = () => {
     return (
       <>
-        <div>
-         <h1 className="btn btn-primary">Home</h1>
+        <div className="container justify-content-center text-center">
+         <h1 className="">Home</h1>
         </div>
       </>
     )

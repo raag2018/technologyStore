@@ -16,7 +16,7 @@ const Login = () => {
     const loginUser = async (data) => {
         try {
             const response = await signInWithEmailAndPassword(auth, data.email, data.password)
-            navigate('/auth/products')
+            navigate('/')
             console.log(response)
         } catch (error) {
             setError(error.message.replace('Firebase', ''))

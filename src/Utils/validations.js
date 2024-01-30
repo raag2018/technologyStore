@@ -12,5 +12,13 @@ const maxPassword = {
     message: 'Password must be less than 24 characters'
 }
 
+const nameValidation = {
+    value: /^[a-zA-ZÀ-ÿ\s]{2,40}$/,
+    message: 'Name is required'
+}
 
-export { emailValidation, minPassword, maxPassword }
+const lastNameValidatio = {
+    value: /^[a-zA-ZÀ-ÿ\s]{2,40}$/,
+    message: 'LastName is required'
+}
+export { emailValidation, minPassword, maxPassword, nameValidation,  lastNameValidatio}

@@ -4,7 +4,7 @@ const Navbar = () => {
         <>
             <nav className='navbar mt-0 navbar-expand-lg navbar-light bg-light'>
                 <div className='container-fluid'>
-                    <a className='navbar-brand' href='#'>TechnologyStore</a>
+                    <a className='navbar-brand' href='#'><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/q_auto/f_auto/c_crop,ar_16:9/v1706547648/Mesa_de_trabajo_1transparent_ybzbrp.png" width={128+"px"}></img></a>
                     <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarText' aria-controls='navbarText' aria-expanded='false' aria-label='Toggle navigation'>
                         <span className='navbar-toggler-icon'></span>
                     </button>

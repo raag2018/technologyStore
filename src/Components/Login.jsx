@@ -24,24 +24,24 @@ const Login = () => {
     }
     return (
         <>
-            <div className="card">
+            <div className="card w-50 mx-auto m-5">
             <div className="card-body">
                 <h5 className="card-title text-center">
-                    Login User
+                    Login
                 </h5>
                 <form onSubmit={handleSubmit(loginUser)}>
                     <div className="mb-3">
                         <input type="text" name="email" {...register("email", { required: 'Email is required', pattern: emailValidation })} className="form-control"
-                            placeholder="Type your email" />
+                            placeholder="Escribe tu correo" />
                         {errors.email && <span className="text-danger">{errors.email.message}</span>}
                     </div>
                     <div className="mb-3">
                         <input type="password" name="password" {...register("password", { required: 'Password is required', minLength: minPassword, maxLength: maxPassword })} className="form-control"
-                            placeholder="Type your password" />
+                            placeholder="Escribe tu contraseña" />
                         {errors.password && <span className="text-danger">{errors.password.message}</span>}
                     </div>
                     <div className="mb-3 d-grid gap-2">
-                        <button type="submit" className="btn btn-success">SignIn</button>
+                        <button type="submit" className="btn btn-success">Iniciar Sesion</button>
                     </div>
                 </form>
                 {

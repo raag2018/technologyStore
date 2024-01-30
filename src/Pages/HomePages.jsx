@@ -8,14 +8,14 @@ const  HomePages = () => {
 
     return (
       <>
-      <div className="jumbotron jumbotron-bg jumbotron-hg">
+      <div className="jumbotron jumbotron-bg jumbotron-hg m-3">
       <div className="mask rounded text-white p-3" style={{backgroundColor: "rgba(0, 0, 0, 0.6)", width:"40%"}}><h1 className="display-4 kanit-black">El cambio que buscas empieza hoy!</h1>
           <p className="lead kanit-black ">Con nuestros cursos especializados en desarrollo web, programacion, diseño y mas, podras hacer realidad tus proyectos virtuales.</p>
           <hr className="my-4"/>
           <p className="kanit-regular">Registrate para ver nuestros cursos como Estudiante o crear nuevos con nuestros perfiles Coach</p>
           <p className="lead kanit-black">
           <NavLink
-            className='nav-link btn-color mx-auto'
+            className='nav-link btn-color-jumbo mx-auto'
             to='/registrar'
             >Registrate</NavLink>
         </p>

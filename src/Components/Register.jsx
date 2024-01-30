@@ -1,3 +1,5 @@
+//TODO: Añadir funcionalidad al selector de tipo de perfil
+
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { app } from '../firebase'
@@ -43,40 +45,69 @@ const Register = () => {
 
     return (
         <>
-            <div className="card">
+            <div className="card w-50 mx-auto m-5">
             <div className="card-body">
                 <h5 className="card-title text-center">
-                    Register User
+                    Registro de usuario
                 </h5>
                 <form onSubmit={handleSubmit(loginUser)}>
                 <div className="mb-3">
-                        <input type="text" name="nombre" {...register("nombre", { required: 'Name is required', pattern: nameValidation })} className="form-control"
-                            placeholder="Type your name" />
+                        <input type="text" name="nombre" {...register("nombre", { required: 'Campo obligatorio', pattern: nameValidation })} className="form-control"
+                            placeholder="Escribe tu nombre" />
                         {errors.nombre && <span className="text-danger">{errors.nombre.message}</span>}
                     </div>
                     <div className="mb-3">
-                        <input type="text" name="apellido" {...register("apellido", { required: 'Lastname is lastname', pattern: lastNameValidatio })} className="form-control"
-                            placeholder="Type your lastname" />
+                        <input type="text" name="apellido" {...register("apellido", { required: 'Campo obligatorio', pattern: lastNameValidatio })} className="form-control"
+                            placeholder="Escribe tu apellido" />
                         {errors.apellido && <span className="text-danger">{errors.apellido.message}</span>}
                     </div>
                     <div className="mb-3">
-                        <input type="text" name="rol_usuario" {...register("rol_usuario", { required: 'Rol user' })} className="form-control"
-                            placeholder="Type your rol users" />
+                        <input type="text" name="rol_usuario" {...register("rol_usuario", { required: 'Campo obligatorio' })} className="form-control"
+                            placeholder="Escribe tu rol de usuario" />
                         {errors.rol_usuario && <span className="text-danger">{errors.rol_usuario.message}</span>}
                     </div>
                     
                     <div className="mb-3">
-                        <input type="text" name="email" {...register("email", { required: 'Email is required', pattern: emailValidation })} className="form-control"
-                            placeholder="Type your email" />
+                        <input type="text" name="email" {...register("email", { required: 'Campo obligatorio', pattern: emailValidation })} className="form-control"
+                            placeholder="Escribe tu correo" />
                         {errors.email && <span className="text-danger">{errors.email.message}</span>}
                     </div>
                     <div className="mb-3">
-                        <input type="password" name="password" {...register("password", { required: 'Password is required', minLength: minPassword, maxLength: maxPassword })} className="form-control"
-                            placeholder="Type your password" />
+                        <input type="password" name="password" {...register("password", { required: 'Campo obligatorio', minLength: minPassword, maxLength: maxPassword })} className="form-control"
+                            placeholder="Escribe tu contraseña" />
                         {errors.password && <span className="text-danger">{errors.password.message}</span>}
                     </div>
+                    <div className='mx-auto'>
+                    <div className="row m-3 justify-content-center">
+                        <h5 className="text-center">Selecciona tu tipo de perfil</h5>
+                        <div className="col-md-4 col-lg-4 col-sm-4">
+                            <label>
+                            <input type="radio" name="product" selected checked className="card-input-element" />
+                                <div className="card card-default card-input">
+                                    <div className="card-header user-select-none text-center kanit-black"><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/e_colorize:50,co_rgb:2ecc71/v1706596671/book_hxbhh6.png" width={100+"px"}></img>Estudiante</div>
+                                        <div className="card-body user-select-none text-center">
+                                        Te permite acceder a los cursos disponibles
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div className="col-md-4 col-lg-4 col-sm-4">
+                            <label>
+                            <input type="radio" name="product" className="card-input-element" />
+                                <div className="card card-default card-input">
+                                    <div className="card-header user-select-none text-center kanit-black"><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/e_colorize:50,co_rgb:2ecc71/v1706596124/coach_isdxyh.png" width={100+"px"}></img>Coach</div>
+                                        <div className="card-body user-select-none text-center">
+                                        Te permite crear y administrar tus propios cursos en Stadi
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    </div>
+
                     <div className="mb-3 d-grid gap-2">
-                        <button type="submit" className="btn btn-success">Create Account</button>
+                        <button type="submit" className="btn btn-success">Crear Cuenta</button>
                     </div>
                 </form>
                 {

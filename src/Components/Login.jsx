@@ -1,3 +1,5 @@
+//TODO: Añadir funcionalidad que verifique el tipo de usuario para permitir accesos a pagina de creacion de cursos y storefront de cursos
+
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { app } from '../firebase'

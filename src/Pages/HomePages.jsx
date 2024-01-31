@@ -2,9 +2,7 @@ import "../CSS/main.css"
 import { NavLink } from 'react-router-dom'
 
 const  HomePages = () => {
-  //<div className="p-5 m-0 text-left bg-image img-fluid rounded-3 mx-auto d-block w-100" style={{backgroundImage: `url(${"https://res.cloudinary.com/dgxmqoyv4/image/upload/c_lfill,g_center,h_500,w_2140,y_0/v1706578187/hero_Mesa_de_trabajo_1_hhjzu0.png"})`}}>
-  //
-    //https://res.cloudinary.com/dgxmqoyv4/image/upload/q_auto/f_auto/c_pad,g_center,w_1080,h_608,ar_16:9/v1706578187/hero_Mesa_de_trabajo_1_hhjzu0.png
+    //TODO: Verificar responsividad del jumbotron y adaptar imagen segun tamaño de dispositivos
 
     return (
       <>

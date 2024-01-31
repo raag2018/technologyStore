@@ -1,5 +1,3 @@
-//TODO: Añadir funcionalidad al selector de tipo de perfil
-
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { app } from '../firebase'
@@ -37,6 +35,7 @@ const Register = () => {
                 rol_usuario: data.rol_usuario
             });
             console.log("se agrego correctamente")
+            console.log(data)
         } catch (e) {
             console.log(e.message)
         }
@@ -61,11 +60,6 @@ const Register = () => {
                             placeholder="Escribe tu apellido" />
                         {errors.apellido && <span className="text-danger">{errors.apellido.message}</span>}
                     </div>
-                    <div className="mb-3">
-                        <input type="text" name="rol_usuario" {...register("rol_usuario", { required: 'Campo obligatorio' })} className="form-control"
-                            placeholder="Escribe tu rol de usuario" />
-                        {errors.rol_usuario && <span className="text-danger">{errors.rol_usuario.message}</span>}
-                    </div>
                     
                     <div className="mb-3">
                         <input type="text" name="email" {...register("email", { required: 'Campo obligatorio', pattern: emailValidation })} className="form-control"
@@ -82,7 +76,7 @@ const Register = () => {
                         <h5 className="text-center">Selecciona tu tipo de perfil</h5>
                         <div className="col-md-4 col-lg-4 col-sm-4">
                             <label>
-                            <input type="radio" name="product" selected checked className="card-input-element" />
+                            <input type="radio" name="rol_usuario" {...register("rol_usuario", { required: 'Selecciona un tipo de perfil' })} selected checked className="card-input-element" value={"Estudiante"} />
                                 <div className="card card-default card-input">
                                     <div className="card-header user-select-none text-center kanit-black"><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/e_colorize:50,co_rgb:2ecc71/v1706596671/book_hxbhh6.png" width={100+"px"}></img>Estudiante</div>
                                         <div className="card-body user-select-none text-center">
@@ -94,7 +88,7 @@ const Register = () => {
                         
                         <div className="col-md-4 col-lg-4 col-sm-4">
                             <label>
-                            <input type="radio" name="product" className="card-input-element" />
+                            <input type="radio" name="rol_usuario" {...register("rol_usuario", { required: 'Selecciona un tipo de perfil' })} className="card-input-element" value={"Coach"} />
                                 <div className="card card-default card-input">
                                     <div className="card-header user-select-none text-center kanit-black"><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/e_colorize:50,co_rgb:2ecc71/v1706596124/coach_isdxyh.png" width={100+"px"}></img>Coach</div>
                                         <div className="card-body user-select-none text-center">

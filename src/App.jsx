@@ -5,11 +5,13 @@ import HomePages from './Pages/HomePages'
 import LoginPages from './Pages/LoginPages'
 import RegisterUser from './Pages/RegisterUser'
 import NotFound from './Pages/NotFound'
+import Courses from './Pages/NewCourse'
 const AppRoutes = () => {
   let routes = useRoutes([
     { path: '/', element: <HomePages /> },
     { path: '/login', element: <LoginPages /> },
     {path: '/registrar', element: <RegisterUser/> },
+    {path: '/auth/cursos', element: <Courses />},
     {path: '/*', element: <NotFound/>}
   ])
   return routes

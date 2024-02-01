@@ -18,7 +18,7 @@ const Register = () => {
         try {
             const response = await createUserWithEmailAndPassword(auth, data.email, data.password)
             const db = getFirestore(app)
-            agregarProfile(db, data)
+            addUser(db, data)
             navigate('/')
             console.log(response)
         } catch (error) {
@@ -26,7 +26,7 @@ const Register = () => {
         }
     }
    
-    const agregarProfile = async(db, data) => {
+    const addUser = async(db, data) => {
         try {
              await addDoc(collection(db, "users"), {
                 nombre: data.nombre,

@@ -168,3 +168,16 @@
     .card-input-element:checked + .card-input {
          box-shadow: 0 0 1px 1px #2ecc71;
     }
+    .form-width {
+      max-width: 95%;
+    }
+    @media (min-width: 767.98px) {
+      .form-width {
+        max-width: 75%;
+      }
+    }
+    @media (min-width: 1023.98px) {
+      .form-width {
+        max-width: 50%;
+      }
+    }

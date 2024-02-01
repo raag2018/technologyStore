@@ -4,7 +4,10 @@ const Navbar = () => {
         <>
             <nav className='navbar mt-0 navbar-expand-lg navbar-light bg-light shadow'>
                 <div className='container-fluid'>
-                    <a className='navbar-brand' href='#'><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/c_crop,w_1024,h_400,g_auto/v1706547648/Mesa_de_trabajo_1transparent_ybzbrp.png" width={150+"px"}></img></a>
+                    <div className='navbar-brand'><NavLink
+                                    to='/'
+                                    className='nav-link'
+                                ><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/c_crop,w_1024,h_400,g_auto/v1706547648/Stadi/Mesa_de_trabajo_1transparent_ybzbrp.png" width={150+"px"}></img></NavLink></div>
                     <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarText' aria-controls='navbarText' aria-expanded='false' aria-label='Toggle navigation'>
                         <span className='navbar-toggler-icon'></span>
                     </button>
@@ -20,7 +23,7 @@ const Navbar = () => {
                             </li>
 
                             <li>
-                                <NavLink to='/Curse'
+                                <NavLink to='/CourseAdd'
                                     className='nav-link'
                                 >
                                     Agregar Cursos
@@ -28,14 +31,6 @@ const Navbar = () => {
                             </li>
                         </ul>
                         <ul className='navbar-nav  mb-2 mb-lg-0'>
-                            <li>
-                                <NavLink
-                                    className='nav-link btn-color text-white me-2'
-                                    to='/registrar'
-                                >
-                                    Registrate
-                                </NavLink>
-                            </li>
                             <li>
                                 <NavLink
                                     to='/login'

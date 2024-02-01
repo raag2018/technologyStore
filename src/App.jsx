@@ -16,7 +16,7 @@ const AppRoutes = () => {
     {path: '/registrar', element: <RegisterUser/> },
     {path: '/auth/cursos', element: <Courses />},
     {path: '/*', element: <NotFound/>},
-    { path: '/Curse', element: <AddCourses /> }
+    { path: '/CourseAdd', element: <AddCourses /> }
 
   ])
   return routes

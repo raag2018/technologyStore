@@ -4,7 +4,7 @@ import { app } from '../firebase'
 import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
 import { getFirestore, collection, addDoc } from 'firebase/firestore/lite';
 import { emailValidation, minPassword, maxPassword, nameValidation, lastNameValidatio } from '../Utils/validations'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 const Register = () => {
     const auth = getAuth(app)
     const navigate = useNavigate()
@@ -44,7 +44,7 @@ const Register = () => {
 
     return (
         <>
-            <div className="card w-50 mx-auto m-5">
+            <div className="card form-width mx-auto m-5">
             <div className="card-body">
                 <h5 className="card-title text-center">
                     Registro de usuario
@@ -71,14 +71,13 @@ const Register = () => {
                             placeholder="Escribe tu contraseña" />
                         {errors.password && <span className="text-danger">{errors.password.message}</span>}
                     </div>
-                    <div className='mx-auto'>
-                    <div className="row m-3 justify-content-center">
+                    <div className="row m-3 justify-content-center mx-auto">
                         <h5 className="text-center">Selecciona tu tipo de perfil</h5>
                         <div className="col-md-4 col-lg-4 col-sm-4">
                             <label>
                             <input type="radio" name="rol_usuario" {...register("rol_usuario", { required: 'Selecciona un tipo de perfil' })} selected checked className="card-input-element" value={"Estudiante"} />
                                 <div className="card card-default card-input">
-                                    <div className="card-header user-select-none text-center kanit-black"><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/e_colorize:50,co_rgb:2ecc71/v1706596671/book_hxbhh6.png" width={100+"px"}></img>Estudiante</div>
+                                    <div className="card-header user-select-none text-center kanit-black"><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/e_colorize:50,co_rgb:2ecc71/v1706596671/book_hxbhh6.png" width={40+"vw"}></img><br/>Estudiante</div>
                                         <div className="card-body user-select-none text-center">
                                         Te permite acceder a los cursos disponibles
                                     </div>
@@ -90,7 +89,7 @@ const Register = () => {
                             <label>
                             <input type="radio" name="rol_usuario" {...register("rol_usuario", { required: 'Selecciona un tipo de perfil' })} className="card-input-element" value={"Coach"} />
                                 <div className="card card-default card-input">
-                                    <div className="card-header user-select-none text-center kanit-black"><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/e_colorize:50,co_rgb:2ecc71/v1706596124/coach_isdxyh.png" width={100+"px"}></img>Coach</div>
+                                    <div className="card-header user-select-none text-center kanit-black"><img src="https://res.cloudinary.com/dgxmqoyv4/image/upload/e_colorize:50,co_rgb:2ecc71/v1706596124/coach_isdxyh.png" width={40+"vw"}></img><br/>Coach</div>
                                         <div className="card-body user-select-none text-center">
                                         Te permite crear y administrar tus propios cursos en Stadi
                                     </div>
@@ -98,11 +97,13 @@ const Register = () => {
                             </label>
                         </div>
                     </div>
-                    </div>
 
                     <div className="mb-3 d-grid gap-2">
                         <button type="submit" className="btn btn-success">Crear Cuenta</button>
                     </div>
+                <div className='text-center mx-auto'><NavLink to='/login'className='nav-link'>
+                Ya tienes una cuenta? <b>Inicia Sesion</b>
+                                </NavLink></div>
                 </form>
                 {
                     error && <span className='text-danger'> {error}</span>

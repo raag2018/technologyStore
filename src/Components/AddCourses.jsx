@@ -7,37 +7,64 @@ import { nameValidation } from '../Utils/validations'
 export const AddCourse = () => {
   const navigate = useNavigate()
   const [error, setError] = useState()
+  const [loading, setLoading] = useState(false)
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm()
 
+  const uploadImage = async (data) => {
+    const files = data.ImageCurse;
+    const arr = new FormData();
+    arr.append('file', files[0]);
+    arr.append('upload_preset', 'technologyStore');
+    setLoading(true);
+    try {
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dyhftwfrw/image/upload",
+        {
+          method: 'POST',
+          body: arr
+        }
+      );
+      const file = await response.json();
+      setLoading(false);
+      return file.secure_url;
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+      throw error;
+    }
+  };
+
   const add = async (data) => {
     try {
-      console.log(data)
-      const db = getFirestore(app)
-      addCourse(db, data)
-      navigate('/')
+        const db = getFirestore(app)
+        addCourse(db, data)
+        navigate('/')
     } catch (error) {
-      setError(error.message)
+      setError(error)
     }
-    console.log(error);
+    console.log(error)
   }
 
   const addCourse = async (db, data) => {
     try {
+      const imageCurse = await uploadImage(data); // Espera a que se complete la carga de la imagen
+      
       await addDoc(collection(db, "cursos"), {
         CourseName: data.CourseName,
         Category: data.Category,
         Description: data.Description,
-        Content: data.Content
+        Content: data.Content,
+        ImageCurse: imageCurse
       });
-      console.log("se agrego correctamente")
+      
     } catch (error) {
-      setError(error.message)
+      setError(error.message);
     }
-  }
+  };
 
   return (
     <div className="Course container justify-content-center mt-3">
@@ -70,13 +97,20 @@ export const AddCourse = () => {
         <br />
         <label className="m-2">
           Contenido:
-
           <input type="text" name="Content" {...register("Content", { required: 'Campo obligatorio', pattern: nameValidation })} className="form-control"
             placeholder="Escribe el contenido del curso" />
           {errors.Content && <span className="text-danger">{errors.Content.message}</span>}
         </label>
         <br />
+        <label className="m-2">
+          Imagen del curso:
+          <input type="file" name="ImageCurse" {...register("ImageCurse", { required: 'Campo obligatorio' })} className="form-control"
+            placeholder="Seleccione la imagen del curso" />
+          {errors.ImageCurse && <span className="text-danger">{errors.ImageCurse.message}</span>}
+        </label>
+        <br />
         <button type="submit" className="btn btn-primary">Enviar</button>
+        {loading ? <span>Agregando Curso...</span> : ''}
       </form>
     </div>
   );

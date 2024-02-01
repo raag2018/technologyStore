@@ -14,7 +14,6 @@ const Courses = () => {
         const dbCourses = collection(db, 'cursos')
         const listCourses = await getDocs(dbCourses)
         const coursesData = listCourses.docs.map(doc => doc.data())
-        console.log(coursesData)
         setCourses(coursesData)
       } catch (error) {
         console.error("Error al obtener datos:", error)
@@ -30,7 +29,7 @@ const Courses = () => {
         courses.map((course, index) => (
           <div key={index} className='col-sm-6 col-lg-4 my-2 mb-3'>
             <div className="bg-primary card mb- border-info">
-              <img src={course.img} className="card-img-top" alt="imagen de course" />
+              <img src={course.ImageCurse} className="card-img-top" alt="imagen de course" width={200} height={200}/>
               <div className="card-body text-white">
                 <h5 className="card-title">Información</h5>
                 <p className="card-text">{course.CourseName.toUpperCase()}</p>

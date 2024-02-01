@@ -1,6 +1,6 @@
 import "../CSS/main.css"
 import { NavLink } from 'react-router-dom'
-
+import Courses from "../Components/Courses"
 const  HomePages = () => {
     //TODO: Verificar responsividad del jumbotron y adaptar imagen segun tamaño de dispositivos
 
@@ -19,6 +19,7 @@ const  HomePages = () => {
         </div>
       
       </div>
+      <Courses/>
       </>
     )
   }

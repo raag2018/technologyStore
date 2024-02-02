@@ -1,14 +1,37 @@
-import { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, addDoc, collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 export const AddCourse = () => {
+  const auth = getAuth();
   const [formData, setFormData] = useState({
-    CourseName: '',
-    Category: 'Finanzas', // Valor predeterminado
-    Description: '',
-    Content: ''
+    courseName: "",
+    category: "Finanzas",
+    description: "",
+    content: "",
   });
+  const [courses, setCourses] = useState([]);
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const db = getFirestore();
+        const coursesCollection = collection(db, "cursos");
+        const coursesSnapshot = await getDocs(coursesCollection);
+        const coursesData = coursesSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCourses(coursesData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCourses();
+  }, []); // Se ejecuta solo una vez al montar el componente
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -16,62 +39,91 @@ export const AddCourse = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Puedes hacer algo con los datos del formulario aquí
-    console.log('Datos enviados:', formData);
+    try {
+      // Aqui podremos utilizar el correo y la contraseña del usuario para la autentificacion
+      const email = "example@example.com";
+      const password = "contraseña";
+      await signInWithEmailAndPassword(auth, email, password);
+
+      // Llama a la funcion para los datos del formulario
+      await newCourse(formData);
+      console.log("Datos enviados", formData);
+
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const newCourse = async (data) => {
+    try {
+      const db = getFirestore();
+      await addDoc(collection(db, "cursos"), data);
+
+      
+      const updatedCoursesSnapshot = await getDocs(collection(db, "cursos"));
+      const updatedCoursesData = updatedCoursesSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setCourses(updatedCoursesData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <div className="Course">
-      <h1>Formulario React</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Nombre del curso:
-          <input
-            type="text"
-            name="CourseName"
-            value={formData.CourseName}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Categoría:
-          <select
-            name="Category"
-            value={formData.Category}
-            onChange={handleChange}
-          >
-            <option value="Finanzas">Finanzas</option>
-            <option value="Salud">Salud</option>
-            <option value="Tecnología">Tecnología</option>
-            <option value="Psicología">Psicología</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Descripción:
-          <input
-            type="text"
-            name="Description"
-            value={formData.Description}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Contenido:
-          <input
-            type="text"
-            name="Content"
-            value={formData.Content}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Nombre del curso:
+        <input
+          type="text"
+          name="courseName"
+          value={formData.courseName}
+          onChange={handleInputChange}
+        />
+      </label>
+      <label>
+        Categoría:
+        <input
+          type="text"
+          name="category"
+          value={formData.category}
+          onChange={handleInputChange}
+        />
+      </label>
+      <label>
+        Descripción:
+        <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleInputChange}
+        />
+      </label>
+      <label>
+        Contenido:
+        <textarea
+          name="content"
+          value={formData.content}
+          onChange={handleInputChange}
+        />
+      </label>
+      <button type="submit">Guardar curso</button>
+      
+      {/* Se renderiza */}
+      <ul>
+        {courses.map((course) => (
+          <div className="card w-50 mx-auto m-5" key={course.id}>
+            <div className="card-body">
+              <h5 className="card-title text-center">
+                {course.courseName} {course.category} {course.content} {course.description}
+              </h5>
+            </div>
+          </div>
+        ))}
+      </ul>
+    </form>
   );
 };

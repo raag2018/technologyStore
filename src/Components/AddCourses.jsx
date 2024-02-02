@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { app } from '../firebase'
 import { getFirestore, collection, addDoc } from 'firebase/firestore/lite'
 import { nameValidation } from '../Utils/validations'
-export const AddCourse = () => {
+const AddCourse = () => {
   const navigate = useNavigate()
   const [error, setError] = useState()
   const [loading, setLoading] = useState(false)
@@ -115,3 +115,4 @@ export const AddCourse = () => {
     </div>
   );
 };
+export default AddCourse

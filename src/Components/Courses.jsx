@@ -28,11 +28,11 @@ const Courses = () => {
       {courses.length > 0 ? (
         courses.map((course, index) => (
           <div key={index} className='col-sm-6 col-lg-4 my-2 mb-3'>
-            <div className="bg-primary card mb- border-info">
-              <img src={course.ImageCurse} className="card-img-top" alt="imagen de course" width={200} height={200}/>
+            <div className="bg-primary card mb- border-info ">
+              <img src={course.ImageCurse} className="card-img-top p-1" alt="imagen de course" width={200} height={200}/>
               <div className="card-body text-white">
                 <h5 className="card-title">Información</h5>
-                <p className="card-text">{course.CourseName.toUpperCase()}</p>
+                <p className="card-text">{course.CourseName}</p>
                 <button onClick={() => navigate(`/course?p=${course.Description}`)} className="btn btn-success">Ver curso</button>
               </div>
             </div>

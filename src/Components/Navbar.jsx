@@ -21,14 +21,6 @@ const Navbar = () => {
                                     Cursos
                                 </NavLink>
                             </li>
-
-                            <li>
-                                <NavLink to='/CourseAdd'
-                                    className='nav-link'
-                                >
-                                    Agregar Cursos
-                                </NavLink>
-                            </li>
                         </ul>
                         <ul className='navbar-nav  mb-2 mb-lg-0'>
                             <li>

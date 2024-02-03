@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { app } from '../firebase'
 import { getFirestore, collection, addDoc } from 'firebase/firestore/lite'
-import { nameValidation } from '../Utils/validations'
+import { nameValidation, imgValidation, descriptionValidation, contentValidation } from '../Utils/validations'
 const AddCourse = () => {
   const navigate = useNavigate()
   const [error, setError] = useState()
@@ -71,7 +71,7 @@ const AddCourse = () => {
       <h1 className="text-center text-muted">Crear Nuevo Curso</h1>
       <form className='form-group' onSubmit={handleSubmit(add)}>
         <div>
-          <label className="m-2">
+          <label className="m-2 fw-bold">
             Nombre del curso:
           </label>
           <input type="text" name="CourseName" {...register("CourseName", { required: 'Campo obligatorio', pattern: nameValidation })} className="form-control"
@@ -79,8 +79,7 @@ const AddCourse = () => {
           {errors.CourseName && <span className="text-danger">{errors.CourseName.message}</span>}
         </div>
         <div>
-
-          <label className="m-2">
+          <label className="m-2 fw-bold">
             Categoría:
           </label>
           <select name="Category" {...register("Category", { required: 'Campo obligatorio' })} className="form-control">
@@ -92,27 +91,26 @@ const AddCourse = () => {
           {errors.Category && <span className="text-danger">{errors.Category.message}</span>}
         </div>
         <div>
-
-          <label className="m-2">
+          <label className="m-2 fw-bold">
             Descripción:
           </label>
-          <input type="text" name="Description" {...register("Description", { required: 'Campo obligatorio', pattern: nameValidation })} className="form-control"
+          <input type="text" name="Description" {...register("Description", { required: 'Campo obligatorio', pattern: descriptionValidation })} className="form-control"
             placeholder="Escribe la descripcion del curso" />
           {errors.Description && <span className="text-danger">{errors.Description.message}</span>}
         </div>
         <div>
-          <label className="m-2">
+          <label className="m-2 fw-bold">
             Contenido:
           </label>
-          <input type="text" name="Content" {...register("Content", { required: 'Campo obligatorio', pattern: nameValidation })} className="form-control"
+          <input type="text" name="Content" {...register("Content", { required: 'Campo obligatorio', pattern: contentValidation })} className="form-control"
             placeholder="Escribe el contenido del curso" />
           {errors.Content && <span className="text-danger">{errors.Content.message}</span>}
         </div>
         <div>
-          <label className="m-2">
+          <label className="m-2 fw-bold">
             Imagen del curso:
           </label>
-          <input type="file" name="ImageCurse" {...register("ImageCurse", { required: 'Campo obligatorio' })} className="form-control"
+          <input type="file" name="ImageCurse" {...register("ImageCurse", { required: 'Campo obligatorio', pattern: imgValidation })} className="form-control"
             placeholder="Seleccione la imagen del curso" />
           {errors.ImageCurse && <span className="text-danger">{errors.ImageCurse.message}</span>}
         </div>

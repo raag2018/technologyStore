@@ -40,9 +40,9 @@ const AddCourse = () => {
 
   const add = async (data) => {
     try {
-        const db = getFirestore(app)
-        addCourse(db, data)
-        navigate('/')
+      const db = getFirestore(app)
+      addCourse(db, data)
+      navigate('/')
     } catch (error) {
       setError(error)
     }
@@ -52,7 +52,7 @@ const AddCourse = () => {
   const addCourse = async (db, data) => {
     try {
       const imageCurse = await uploadImage(data); // Espera a que se complete la carga de la imagen
-      
+
       await addDoc(collection(db, "cursos"), {
         CourseName: data.CourseName,
         Category: data.Category,
@@ -60,7 +60,7 @@ const AddCourse = () => {
         Content: data.Content,
         ImageCurse: imageCurse
       });
-      
+
     } catch (error) {
       setError(error.message);
     }
@@ -69,16 +69,20 @@ const AddCourse = () => {
   return (
     <div className="Course container justify-content-center mt-3">
       <h1 className="text-center text-muted">Crear Nuevo Curso</h1>
-      <form onSubmit={handleSubmit(add)}>
-        <label className="m-2">
-          Nombre del curso:
+      <form className='form-group' onSubmit={handleSubmit(add)}>
+        <div>
+          <label className="m-2">
+            Nombre del curso:
+          </label>
           <input type="text" name="CourseName" {...register("CourseName", { required: 'Campo obligatorio', pattern: nameValidation })} className="form-control"
             placeholder="Escribe el nombre del curso" />
           {errors.CourseName && <span className="text-danger">{errors.CourseName.message}</span>}
-        </label>
-        <br />
-        <label className="m-2">
-          Categoría:
+        </div>
+        <div>
+
+          <label className="m-2">
+            Categoría:
+          </label>
           <select name="Category" {...register("Category", { required: 'Campo obligatorio' })} className="form-control">
             <option value="Finanzas">Finanzas</option>
             <option value="Salud">Salud</option>
@@ -86,31 +90,36 @@ const AddCourse = () => {
             <option value="Psicología">Psicología</option>
           </select>
           {errors.Category && <span className="text-danger">{errors.Category.message}</span>}
-        </label>
-        <br />
-        <label className="m-2">
-          Descripción:
+        </div>
+        <div>
+
+          <label className="m-2">
+            Descripción:
+          </label>
           <input type="text" name="Description" {...register("Description", { required: 'Campo obligatorio', pattern: nameValidation })} className="form-control"
             placeholder="Escribe la descripcion del curso" />
           {errors.Description && <span className="text-danger">{errors.Description.message}</span>}
-        </label>
-        <br />
-        <label className="m-2">
-          Contenido:
+        </div>
+        <div>
+          <label className="m-2">
+            Contenido:
+          </label>
           <input type="text" name="Content" {...register("Content", { required: 'Campo obligatorio', pattern: nameValidation })} className="form-control"
             placeholder="Escribe el contenido del curso" />
           {errors.Content && <span className="text-danger">{errors.Content.message}</span>}
-        </label>
-        <br />
-        <label className="m-2">
-          Imagen del curso:
+        </div>
+        <div>
+          <label className="m-2">
+            Imagen del curso:
+          </label>
           <input type="file" name="ImageCurse" {...register("ImageCurse", { required: 'Campo obligatorio' })} className="form-control"
             placeholder="Seleccione la imagen del curso" />
           {errors.ImageCurse && <span className="text-danger">{errors.ImageCurse.message}</span>}
-        </label>
-        <br />
-        <button type="submit" className="btn btn-primary">Enviar</button>
-        {loading ? <span>Agregando Curso...</span> : ''}
+        </div>
+        <div className='m-2'>
+          <button type="submit" className="btn btn-primary">Guardar</button>
+          {loading ? <span>Guardando Curso...</span> : ''}
+        </div>
       </form>
     </div>
   );

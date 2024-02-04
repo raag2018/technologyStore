@@ -14,7 +14,7 @@ const AppRoutes = () => {
     {path: '/registrar', element: <RegisterUser/> },
     {path: '/*', element: <NotFound/>},
     ///auth/ seria de poner la funcion de autenticar la ruta de /dashboard
-    {path: '/dashboard', element: <UserType/>}
+    {path: '/auth/dashboard', element: <UserType/>}
 
   ])
   return routes

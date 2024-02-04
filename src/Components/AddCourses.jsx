@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import { app } from '../firebase'
 import { getFirestore, collection, addDoc } from 'firebase/firestore/lite'
 import { nameValidation, imgValidation, descriptionValidation, contentValidation } from '../Utils/validations'
-const AddCourse = () => {
-  const navigate = useNavigate()
+const AddCourse = (props) => {
+  const coach = props
   const [error, setError] = useState()
+  const [guardar, setGuardar] = useState(false)
   const [loading, setLoading] = useState(false)
   const {
     register,
@@ -42,7 +42,7 @@ const AddCourse = () => {
     try {
       const db = getFirestore(app)
       addCourse(db, data)
-      navigate('/')
+      setGuardar(true)
     } catch (error) {
       setError(error)
     }
@@ -52,13 +52,13 @@ const AddCourse = () => {
   const addCourse = async (db, data) => {
     try {
       const imageCurse = await uploadImage(data); // Espera a que se complete la carga de la imagen
-
       await addDoc(collection(db, "cursos"), {
         CourseName: data.CourseName,
         Category: data.Category,
         Description: data.Description,
         Content: data.Content,
-        ImageCurse: imageCurse
+        ImageCurse: imageCurse,
+        Couch: coach.coach
       });
 
     } catch (error) {
@@ -118,7 +118,8 @@ const AddCourse = () => {
             </div>
             <div className='m-2'>
               <button type="submit" className="btn btn-primary">Guardar</button>
-              {loading ? <span>Guardando Curso...</span> : ''}
+              {loading ? <span className="alert alert-info">Guardando Curso...</span> : ''}
+              {guardar ? <span className="m-2 alert alert-success">Se guardo exitosamente</span> : ''}
             </div>
           </form>
         </div>

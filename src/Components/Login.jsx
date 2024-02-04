@@ -21,11 +21,13 @@ const Login = () => {
             const storage = localStorage.getItem('USER_V1')
             const dataUser = JSON.parse(storage)
             const emailUser = dataUser.email;
+            dataUser.sesion = true
+            localStorage.setItem('USER_V1', JSON.stringify(dataUser))
             const response = await signInWithEmailAndPassword(auth, data.email, data.password)
             if (!response.user.email && !emailUser) {
                 setError("Usted no posee una cuenta")
             } else {
-                navigate('/dashboard')
+                navigate('/auth/dashboard')
             }
         } catch (error) {
             setError("El usuario y/o contraseña son incorrectos")

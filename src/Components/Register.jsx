@@ -23,7 +23,8 @@ const Register = () => {
                     nombre: data.nombre,
                     apellido: data.apellido,
                     correo: data.email,
-                    rol_usuario: data.rol_usuario
+                    rol_usuario: data.rol_usuario,
+                    sesion: false
                 }
                 const initialValue = JSON.stringify(newUser)
                 localStorage.setItem('USER_V1', initialValue)

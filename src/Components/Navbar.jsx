@@ -1,29 +1,27 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { getAuth, signOut } from "firebase/auth"
 import { app } from '../firebase'
 const Navbar = () => {
     const auth = getAuth(app)
     const [sesion, setSesion] = useState(false)
     const navigate = useNavigate()
     useEffect(() => {
-        const authentication = async () => {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    const storage = localStorage.getItem("USER_V1");
-                    const parsedDataUser = JSON.parse(storage);
-                    setSesion(parsedDataUser.sesion)
-                } else {
-                    const storage = localStorage.getItem('USER_V1')
-                    const dataUser = JSON.parse(storage)
-                    dataUser.sesion = false
-                    localStorage.setItem('USER_V1', JSON.stringify(dataUser))
-                    navigate('/login')
-                }
-            })
-        }
-        authentication()
-    }, []);
+        const storage = localStorage.getItem('USER_V1')
+        const dataUser = JSON.parse(storage)
+        dataUser.sesion = true
+        setSesion(dataUser.sesion)
+        localStorage.setItem('USER_V1', JSON.stringify(dataUser))
+    }, [])
+    const logout = async () => {
+        await signOut(auth)
+        const storage = localStorage.getItem('USER_V1')
+        const dataUser = JSON.parse(storage)
+        dataUser.sesion = false
+        setSesion(dataUser.sesion)
+        localStorage.setItem('USER_V1', JSON.stringify(dataUser))
+        navigate('/login')
+    }
     return (
         <>
             <nav className='navbar mt-0 navbar-expand-lg navbar-light bg-light shadow'>
@@ -48,19 +46,19 @@ const Navbar = () => {
                         </ul>
                         <ul className='navbar-nav  mb-2 mb-lg-0'>
                             {sesion ?
-                                <li>
-                                    <NavLink
-                                        to='/login'
-                                        className='nav-link btn-color text-white'
+                                <li className='text-sm-left'>
+                                    <button
+                                        onClick={logout}
+                                        className='nav-link  text-dark '
                                     >
                                         Cerrar Sesion
-                                    </NavLink>
+                                    </button>
                                 </li>
                                 :
-                                <li>
+                                <li className='text-sm-left'>
                                     <NavLink
                                         to='/login'
-                                        className='nav-link btn-color text-white'
+                                        className='nav-link  text-dark '
                                     >
                                         Iniciar Sesion
                                     </NavLink>

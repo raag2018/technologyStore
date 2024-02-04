@@ -67,10 +67,9 @@ const AddCourse = (props) => {
   };
 
   return (
-    <div className="Course container justify-content-center mt-3">
-      <div className="row">
-        <div className="col-sm-6">
-          <h1 className="text-center text-muted">Crear Nuevo Curso</h1>
+   
+        <div className="col-sm-6 bg-light border border-dark rounded">
+          <h3 className="text-center text-muted ">Crear nuevo curso</h3>
           <form className='form-group' onSubmit={handleSubmit(add)}>
             <div>
               <label className="m-2 fw-bold">
@@ -116,18 +115,13 @@ const AddCourse = (props) => {
                 placeholder="Seleccione la imagen del curso" />
               {errors.ImageCurse && <span className="text-danger">{errors.ImageCurse.message}</span>}
             </div>
-            <div className='m-2'>
+            <div className='m-2 text-center'>
               <button type="submit" className="btn btn-primary">Guardar</button>
               {loading ? <span className="alert alert-info">Guardando Curso...</span> : ''}
               {guardar ? <span className="m-2 alert alert-success">Se guardo exitosamente</span> : ''}
             </div>
           </form>
         </div>
-        <div className="col-sm-6">
-
-        </div>
-      </div>
-    </div>
   );
 };
 export default AddCourse

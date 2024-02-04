@@ -4,7 +4,7 @@ const ListCourse = () => {
     const context = useContext(ListCourseContext)
 
     return (
-        <div className="col-sm-6 bg-light rounded border border-dark ">
+        <div className="col-sm-6 bg-light rounded border border-dark mt-2">
             <h3 className="">Lista de cursos</h3>
             <table className="table table-sm">
                 <thead>

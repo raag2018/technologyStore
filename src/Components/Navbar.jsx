@@ -1,25 +1,29 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { getAuth, signOut } from "firebase/auth"
 import { app } from '../firebase'
+import { CorreoContext } from '../Context/correoContext'
 const Navbar = () => {
     const auth = getAuth(app)
     const [sesion, setSesion] = useState(false)
     const navigate = useNavigate()
+    const context = useContext(CorreoContext)
     useEffect(() => {
-        const storage = localStorage.getItem('USER_V1')
-        const dataUser = JSON.parse(storage)
-        dataUser.sesion = true
-        setSesion(dataUser.sesion)
-        localStorage.setItem('USER_V1', JSON.stringify(dataUser))
-    }, [])
+        const storage = localStorage.getItem(`${context.correo}`)
+        if(storage){
+            const dataUser = JSON.parse(storage)
+            dataUser.sesion = true
+            setSesion(dataUser.sesion)
+            localStorage.setItem(`${context.correo}`, JSON.stringify(dataUser))
+        }
+    }, [context])
     const logout = async () => {
         await signOut(auth)
-        const storage = localStorage.getItem('USER_V1')
+        const storage = localStorage.getItem(`${context.correo}`)
         const dataUser = JSON.parse(storage)
         dataUser.sesion = false
         setSesion(dataUser.sesion)
-        localStorage.setItem('USER_V1', JSON.stringify(dataUser))
+        localStorage.setItem(`${context.correo}`, JSON.stringify(dataUser))
         navigate('/login')
     }
     return (

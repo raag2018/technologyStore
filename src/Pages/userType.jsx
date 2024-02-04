@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { app } from '../firebase'
-
+import { CorreoContext } from '../Context/correoContext'
 import AddCourse from '../Components/AddCourses'
 import ListCourse from '../Components/ListCourse'
 const UserType = () => {
@@ -12,21 +12,21 @@ const UserType = () => {
   const navigate = useNavigate()
   const auth = getAuth(app)
   const [sesion, setSesion] = useState(false)
-
+  const context = useContext(CorreoContext)
   useEffect(() => {
     const authentication =
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          const storage = localStorage.getItem("USER_V1");
+          const storage = localStorage.getItem(`${context.correo}`);
           const parsedDataUser = JSON.parse(storage);
           setSesion(parsedDataUser.sesion)
           setTypeUser(parsedDataUser.rol_usuario)
           setDataUser(parsedDataUser)
         } else {
-          const storage = localStorage.getItem('USER_V1')
+          const storage = localStorage.getItem(`${context.correo}`)
           const dataUser = JSON.parse(storage)
           dataUser.sesion = sesion
-          localStorage.setItem('USER_V1', JSON.stringify(dataUser))
+          localStorage.setItem(`${context.correo}`, JSON.stringify(dataUser))
           navigate('/login')
         }
         setLoading(false)
@@ -34,7 +34,7 @@ const UserType = () => {
     return () => {
       authentication()
     }
-  }, [auth, navigate, sesion]);
+  }, [auth, navigate, sesion, context]);
   if (typeUser === 'Estudiante') {
     if (loading) { return <h1>Cargando</h1> }
     return (

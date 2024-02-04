@@ -1,14 +1,16 @@
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { app } from '../firebase'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { getFirestore, collection, addDoc } from 'firebase/firestore/lite';
 import { emailValidation, minPassword, maxPassword, nameValidation, lastNameValidatio } from '../Utils/validations'
+import { CorreoContext } from '../Context/correoContext'
 const Register = () => {
     const auth = getAuth(app)
     const navigate = useNavigate()
     const [error, setError] = useState()
+    const context = useContext(CorreoContext)
     const {
         register,
         handleSubmit,
@@ -17,7 +19,8 @@ const Register = () => {
 
     const loginUser = async (data) => {
         try {
-            const storage = localStorage.getItem('USER_V1')
+            context.setCorreo(data.correo)
+            const storage = localStorage.getItem(`${data.email}`)
             if (!storage) {
                 const newUser = {
                     nombre: data.nombre,
@@ -27,7 +30,7 @@ const Register = () => {
                     sesion: false
                 }
                 const initialValue = JSON.stringify(newUser)
-                localStorage.setItem('USER_V1', initialValue)
+                localStorage.setItem(`${data.email}`, initialValue)
                 await createUserWithEmailAndPassword(auth, data.email, data.password)
                 const db = getFirestore(app)
                 addUser(db, data)

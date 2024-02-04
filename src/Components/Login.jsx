@@ -1,16 +1,18 @@
 //TODO: Añadir funcionalidad que verifique el tipo de usuario para permitir accesos a pagina de creacion de cursos y storefront de cursos
 
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { app } from '../firebase'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { emailValidation, minPassword, maxPassword } from '../Utils/validations'
 import { useNavigate } from 'react-router-dom'
+import { CorreoContext } from '../Context/correoContext'
 const Login = () => {
     const auth = getAuth(app)
     const navigate = useNavigate()
     const [error, setError] = useState()
+    const context = useContext(CorreoContext)
     const {
         register,
         handleSubmit,
@@ -18,12 +20,12 @@ const Login = () => {
     } = useForm()
     const loginUser = async (data) => {
         try {
-            const storage = localStorage.getItem('USER_V1')
+            const response = await signInWithEmailAndPassword(auth, data.email, data.password)
+            const storage = localStorage.getItem(`${context.correo}`)
             const dataUser = JSON.parse(storage)
             const emailUser = dataUser.email;
             dataUser.sesion = true
-            localStorage.setItem('USER_V1', JSON.stringify(dataUser))
-            const response = await signInWithEmailAndPassword(auth, data.email, data.password)
+            localStorage.setItem(`${context.correo}`, JSON.stringify(dataUser))
             if (!response.user.email && !emailUser) {
                 setError("Usted no posee una cuenta")
             } else {

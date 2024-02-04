@@ -68,7 +68,7 @@ const AddCourse = (props) => {
 
   return (
    
-        <div className="col-sm-6 bg-light border border-dark rounded">
+        <div className="col-sm-6 bg-light border border-dark rounded mt-2">
           <h3 className="text-center text-muted ">Crear nuevo curso</h3>
           <form className='form-group' onSubmit={handleSubmit(add)}>
             <div>

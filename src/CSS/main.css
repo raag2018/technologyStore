@@ -183,10 +183,17 @@ body {
 .form-width {
   max-width: 95%;
 }
-
-@media (min-width: 767.98px) {
+.jumbotron-card{
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 40%;
+}
+@media only screen and (max-width: 767.98px) {
   .form-width {
     max-width: 75%;
+  }
+  .jumbotron-card{
+    width: 90%;
+    margin-top: 10px;
   }
 }
 

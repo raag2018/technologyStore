@@ -1,5 +1,5 @@
 import { useRoutes, BrowserRouter } from 'react-router-dom'
-
+import ListCourseProvider from './Context/ListCourseContext'
 import NavBar from './Components/Navbar'
 import HomePages from './Pages/HomePages'
 import LoginPages from './Pages/LoginPages'
@@ -23,10 +23,12 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <>
+    <ListCourseProvider>
       <BrowserRouter>
           <NavBar />
           <AppRoutes />
       </BrowserRouter>
+    </ListCourseProvider>
     </>
   )
 }

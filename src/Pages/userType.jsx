@@ -49,7 +49,7 @@ const UserType = () => {
       <div className="Course container justify-content-center mt-3">
         <div className="row">
           <AddCourse coach={`${dataUser.nombre} ${dataUser.apellido}`} />
-          <ListCourse coach={`${dataUser.nombre} ${dataUser.apellido}`} />
+          <ListCourse />
         </div>
       </div>
 

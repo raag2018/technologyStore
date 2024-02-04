@@ -5,6 +5,7 @@ import { app } from '../firebase'
 import { CorreoContext } from '../Context/correoContext'
 import AddCourse from '../Components/AddCourses'
 import ListCourse from '../Components/ListCourse'
+import Student from '../Components/Student'
 const UserType = () => {
   const [typeUser, setTypeUser] = useState("");
   const [dataUser, setDataUser] = useState(null);
@@ -39,13 +40,12 @@ const UserType = () => {
     if (loading) { return <h1>Cargando</h1> }
     return (
       <div>
-        {typeUser}
+        <Student />
       </div>
     );
   } else if (typeUser === 'Coach') {
     if (loading) { return <h1>Cargando</h1> }
     return (
-
       <div className="Course container justify-content-center mt-3">
         <div className="row">
           <AddCourse coach={`${dataUser.nombre} ${dataUser.apellido}`} />

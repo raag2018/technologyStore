@@ -47,13 +47,21 @@ const Navbar = () => {
                                     Cursos
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink
+                                    to='/auth/dashboard'
+                                    className='nav-link'
+                                >
+                                    Mi Perfil
+                                </NavLink>
+                            </li>
                         </ul>
-                        <ul className='navbar-nav  mb-2 mb-lg-0'>
+                        <ul className='navbar-nav  mb-2 mb-lg-0 '>
                             {sesion ?
                                 <li className='text-sm-left'>
-                                    <button
+                                    <button 
                                         onClick={logout}
-                                        className='nav-link  text-dark '
+                                        className='nav-link  text-dark border-0 bg-light'
                                     >
                                         Cerrar Sesion
                                     </button>
@@ -67,7 +75,6 @@ const Navbar = () => {
                                         Iniciar Sesion
                                     </NavLink>
                                 </li>
-
                             }
                         </ul>
                     </div>
@@ -77,3 +84,4 @@ const Navbar = () => {
     )
 }
 export default Navbar
+//navigate('/auth/dashboard')

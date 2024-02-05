@@ -21,7 +21,7 @@ const imgValidation = {
     message: 'Image is required'
 }
 const descriptionValidation = {
-    value: /^[a-zA-ZÀ-ÿ\s0-9\s]{10,200}$/,
+    value: /^[\w\s.,;:'"!?¿¡@#$%^&*()_+\-=[\]{}|\\`~<>\/]{0,500}$/u,
     message: 'Description is required'
 }
 const contentValidation = {

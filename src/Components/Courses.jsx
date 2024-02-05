@@ -15,6 +15,7 @@ const Courses = () => {
         const listCourses = await getDocs(dbCourses)
         const coursesData = listCourses.docs.map(doc => doc.data())
         setCourses(coursesData)
+        console.log(coursesData)
       } catch (error) {
         console.error("Error al obtener datos:", error)
       }
@@ -33,7 +34,7 @@ const Courses = () => {
               <div className="card-body text-white">
                 <h5 className="card-title">Información</h5>
                 <p className="card-text">{course.CourseName}</p>
-                <button onClick={() => navigate(`/course?p=${course.Description}`)} className="btn btn-success">Ver curso</button>
+                <button onClick={() => navigate(`/course/${course.CourseName}`, {state: {key: `${course.CourseName}`}})} className="btn btn-success">Ver curso</button>
               </div>
             </div>
           </div>

@@ -8,6 +8,7 @@ import RegisterUser from './Pages/RegisterUser'
 import NotFound from './Pages/NotFound'
 import UserType from './Pages/userType'
 import CourseDetails from './Pages/CourseDetails'
+import Footer from './Components/Footer'
 
 
 const AppRoutes = () => {
@@ -31,6 +32,7 @@ const App = () => {
           <BrowserRouter>
             <NavBar />
             <AppRoutes />
+            <Footer />
           </BrowserRouter>
         </ListCourseProvider>
       </CorreoContextProvider>

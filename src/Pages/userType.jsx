@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import { getAuth, onAuthStateChanged } from "firebase/auth"
@@ -26,7 +27,7 @@ const UserType = () => {
         } else {
           const storage = localStorage.getItem(`${context.correo}`)
           const dataUser = JSON.parse(storage)
-          dataUser.sesion = sesion
+          dataUser.sesion = false
           localStorage.setItem(`${context.correo}`, JSON.stringify(dataUser))
           navigate('/login')
         }
@@ -40,8 +41,8 @@ const UserType = () => {
     if (loading) { return <h1>Cargando</h1> }
     return (
       <div>
-        <Student />
-      </div>
+        <Student/>
+              </div>
     );
   } else if (typeUser === 'Coach') {
     if (loading) { return <h1>Cargando</h1> }

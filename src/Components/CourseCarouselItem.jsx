@@ -12,29 +12,30 @@ const CourseCarouselItem = () => {
                 const dbCourses = collection(db, 'cursos')
                 const listCourses = await getDocs(dbCourses)
                 const coursesData = listCourses.docs.map(doc => doc.data())
+                console.log(coursesData)
                 setCourses(coursesData)
             } catch (error) {
                 console.error("Error al obtener datos:", error)
             }
         }
         fetchCourses()
-    }, [db])
+    }, [db])    
     return (
         <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
             <ol className="carousel-indicators">
                 {courses.length > 0 &&
-                    courses.map((_, index) => (
+                    courses.map(( _, index) => (
                         <li key={index} data-target="#carouselExampleIndicators" data-slide-to={index} className={index === 0 ? "active" : ""}></li>
                     ))}
             </ol>
             <div className="carousel-inner">
                 {courses.length > 0 ? (
                     courses.map((course, index) => (
-                        <div className="carousel-item" key={index}>
-                            <img src={course.ImageCourse} alt={course.CourseName}></img>
+                        <div  key={index} className={`carousel-item  ${index === 0 ? 'active' : ''}`}>
+                            <img src={course.ImageCurse} alt={course.CourseName} style={{"width": '100%'}} height={300}/>
                                 <div className="carousel-caption d-none d-md-block">
                                     <h5>{course.CourseName}</h5>
-                                    <p>{course.Coach}</p>
+                                    <p>{course.Couch}</p>
                                 </div>
                         </div>
                     ))

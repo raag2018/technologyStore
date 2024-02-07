@@ -24,6 +24,8 @@ const Navbar = () => {
         dataUser.sesion = false
         setSesion(dataUser.sesion)
         localStorage.setItem(`${context.correo}`, JSON.stringify(dataUser))
+        localStorage.clear()
+        sessionStorage.clear()
         navigate('/login')
     }
     return (

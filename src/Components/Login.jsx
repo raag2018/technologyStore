@@ -1,7 +1,7 @@
 //TODO: Añadir funcionalidad que verifique el tipo de usuario para permitir accesos a pagina de creacion de cursos y storefront de cursos
 
 import { useForm } from 'react-hook-form'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { app } from '../firebase'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
@@ -16,8 +16,25 @@ const Login = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
+        clearErrors,
+        watch
     } = useForm()
+
+    const email = watch('email')
+    const password = watch('password')
+
+    useEffect(() => {
+        if (email) {
+          clearErrors('email')
+          setError(undefined)
+        } else if (password) {
+          clearErrors('password')
+          setError(undefined)
+        }
+      }, [email, clearErrors, password])
+
+
     const loginUser = async (data) => {
         try {
             const response = await signInWithEmailAndPassword(auth, data.email, data.password)
@@ -26,12 +43,23 @@ const Login = () => {
             const emailUser = dataUser.email;
             dataUser.sesion = true
             localStorage.setItem(`${context.correo}`, JSON.stringify(dataUser))
+            console.log(response)
+            console.log(dataUser)
+            console.log(emailUser)
             if (!response.user.email && !emailUser) {
                 setError("Usted no posee una cuenta")
             } else {
-                navigate('/auth/dashboard')
+                // Check user type and navigate accordingly
+                if (dataUser.userType === 'admin') {
+                    setError(undefined)
+                    navigate('/admin/dashboard')
+                } else {
+                    setError(undefined)
+                    navigate('/auth/dashboard')
+                }
             }
         } catch (error) {
+            console.log(error)
             setError("El usuario y/o contraseña son incorrectos")
         }
     }

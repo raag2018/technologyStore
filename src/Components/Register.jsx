@@ -34,6 +34,7 @@ const Register = () => {
                 await createUserWithEmailAndPassword(auth, data.email, data.password)
                 const db = getFirestore(app)
                 addUser(db, data)
+                console.log(localStorage)
                 navigate('/login')
             } else {
                 setError("Este usuario ya existe")

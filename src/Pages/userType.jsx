@@ -68,7 +68,8 @@ const UserType = () => {
 
     )
   } else {
-    if (loading) { return <>
+    if (loading) { return (
+    <>
       <h1 className='m-3 text-center'>Cargando</h1>
           {showMessage && (
             <>
@@ -80,7 +81,7 @@ const UserType = () => {
               </div>
             </>
           )}
-    </> }
+    </> )}
   }
 }
 export default UserType;

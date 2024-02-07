@@ -15,7 +15,7 @@ const Courses = () => {
         const listCourses = await getDocs(dbCourses)
         const coursesData = listCourses.docs.map(doc => doc.data())
         setCourses(coursesData)
-        console.log(coursesData)
+        //console.log(coursesData)
       } catch (error) {
         console.error("Error al obtener datos:", error)
       }
